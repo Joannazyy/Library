@@ -2,14 +2,14 @@
 include 'head.php';
 ?>
 <h3><a href="library.php">Library</a></h3>
-<button class="btn btn-success admin" style="margin-left: 10px" onclick="showCustomerForm()">Book Title</button>
+<button class="btn btn-success admin" style="margin-left: 10px" onclick="showLibraryForm()">Book Title</button>
 
 <form action="" method="get" class="form-inline" style="display: inline-block;margin-left: 10px">
     <input type="text" class="form-control" name="query" value="">
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
 <div id="addBook" style="margin: 10px; display: none">
-    <form action="restaurants_add.php" method="post" class="form" role="form" enctype="multipart/form-data">
+    <form action="book_add.php" method="post" class="form" role="form" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">ISBN</label>
             <input type="text" class="form-control" id="ISBN" name="ISBN" placeholder="ISBN">
