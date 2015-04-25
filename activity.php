@@ -3,6 +3,14 @@ include 'head.php';
 ?>
 <h3><a href="library.php">Activity Event</a></h3>
 
+<button class="btn btn-success admin" style="margin-left: 10px" onclick="showLibraryForm()">Activity Name</button>
+
+<form action="" method="get" class="form-inline" style="display: inline-block;margin-left: 10px">
+    <input type="text" class="form-control" name="query" value="">
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
 <?php
 include 'db.php';
 
@@ -12,7 +20,15 @@ if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL DB: " . mysqli_connect_error();
 }
 
-$result = mysqli_query($con, "SELECT * FROM activity");
+if(isset($_GET["query"])){
+    $query = $_GET["query"];
+    $result = mysqli_query($con, "SELECT * FROM activity WHERE Event_name LIKE '%$query%'");
+}
+else{
+    $result = mysqli_query($con, "SELECT * FROM activity");
+}
+
+#$result = mysqli_query($con, "SELECT * FROM activity");
 
 
 echo "<table class='table table-striped table-bordered' style='margin-top: 10px'><tr>
