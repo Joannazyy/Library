@@ -9,6 +9,7 @@ include 'head.php';
 h1{
 	margin-top: 50px;
 	text-align: center;
+	font-weight: bolder;
 
 }
 
