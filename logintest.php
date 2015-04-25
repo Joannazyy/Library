@@ -2,6 +2,19 @@
 include 'head.php';
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h1{
+
+  font-weight: bolder;
+}
+
+</style>
+</head>
+</html>
+
 <h1>Membership Information</h1>
 
 
@@ -20,7 +33,7 @@ include 'head.php';
 
      #SELECT count(*) FROM membershiptest where (
      #username='$uname' and password='$pass');
-     
+  
      $query = mysql_query($sql);
 
      $result = mysql_fetch_array($query);
@@ -28,6 +41,43 @@ include 'head.php';
      if ($result[0]>0){
      	$_SESSION['userName'] = $uname;
      	echo "<br /><h2>Welcome ".$_SESSION['userName']."!</h2>";
+
+
+          // Table 1
+          echo "<br /><h3>Personal Information</h3>";
+
+          $info= "SELECT id, username, Street, City, Region, Zip_code, Date_of_issue, Date_of_expiry, Status FROM membership_full
+             WHERE (id='".$id."')";
+     
+          $info_query=mysql_query($info);
+
+          echo "<table class='table table-striped table-bordered' style='margin-top: 10px'><tr>
+               <th>ID</th>
+               <th>Name</th>
+               <th>Street</th>
+               <th>City</th>
+               <th>Region</th>
+               <th>Zip code</th>
+               <th>Issue Date</th>
+               <th>Expire date</th>
+               <th>Status</th>
+               </tr>";
+          while ($row = mysql_fetch_array($info_query)) {
+               echo "<tr>";
+               echo "<td>" . $row['id'] . "</td><td>"
+                   ."<a href='items.php?number=".$row['id']."'>". $row['username'] . "</a></td><td>"
+                   . $row['Street'] . "</td><td>"
+                   . $row['City'] . "</td><td>"
+                   . $row['Region'] . "</td><td>"
+                   . $row['Zip_code'] . "</td><td>"
+                   . $row['Date_of_issue'] . "</td><td>"
+                   . $row['Date_of_expiry'] . "</td><td>"
+                   . $row['Status'] . "</td>";
+               echo "</tr>";
+          }
+          echo "</table>";
+
+          // Table 2
           echo "<br /><h3>Check out your books!</h3>";
 
           $check="SELECT * From issue WHERE ( ID='".$id."')";
@@ -52,6 +102,7 @@ include 'head.php';
           }
           echo "</table>";
 
+          // Table 3
           echo "<br /><h3>Your events schedule!</h3>";
 
           $find="SELECT * From membership_activity WHERE ( id='".$id."')";
